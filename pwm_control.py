@@ -15,30 +15,30 @@ import time
 import pigpio
 
 SERVO = 23
-
+max_throttle = 2000
+min_throttle = 700
 pi = pigpio.pi() # Connect to local Pi.
 
 pi.set_servo_pulsewidth(SERVO, 0) # Minimum throttle.
 
 time.sleep(1)
 
-pi.set_servo_pulsewidth(SERVO, 700) # Minimum throttle.
+for i in range(0,max_throttle):
+    pi.set_servo_pulsewidth(SERVO, i)
+print("max")
+time.sleep(0.5)
 
-time.sleep(1)
+for i in range(max_throttle,min_throttle):
+    pi.set_servo_pulsewidth(SERVO, i)
 
-pi.set_servo_pulsewidth(SERVO, 2000) # Maximum throttle.
+print("min")
+time.sleep(0.5)
 
-time.sleep(1)
+for i in range(min_throttle,1100):
+    pi.set_servo_pulsewidth(SERVO, i)
 
-pi.set_servo_pulsewidth(SERVO, 700) # Minimum throttle.
-
-time.sleep(1)
-
-pi.set_servo_pulsewidth(SERVO, 1100) # Slightly open throttle.
-
-time.sleep(1)
-
-pi.set_servo_pulsewidth(SERVO, 0) # Stop servo pulses.
+print("mid")
+time.sleep(2)
 
 pi.stop() # Disconnect from local Raspberry Pi.
 
