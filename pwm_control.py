@@ -23,7 +23,7 @@ pi.set_servo_pulsewidth(SERVO, 0) # Minimum throttle.
 
 time.sleep(1)
 
-for i in range(0,max_throttle):
+for i in range(min_throttle,max_throttle):
     pi.set_servo_pulsewidth(SERVO, i)
 print("max")
 time.sleep(0.5)
