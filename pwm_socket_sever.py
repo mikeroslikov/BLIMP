@@ -24,7 +24,7 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            connection.sendall(throttle_position)
+            connection.sendall(throttle_position.to_bytes(2, byteorder='big'))
             time.sleep(0.1)
             
     finally:
