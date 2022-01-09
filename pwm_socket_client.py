@@ -26,7 +26,7 @@ try:
     while True:
         data = int.from_bytes(sock.recv(32), byteorder='big')
         #print("received "+ str(data))
-        if data < 2500 || data > 500 :
+        if data < 2500 and data > 500 :
             pi.set_servo_pulsewidth(SERVO, data)
 
 finally:
