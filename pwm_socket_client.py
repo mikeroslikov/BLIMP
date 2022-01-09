@@ -12,7 +12,7 @@ sock.connect(server_address)
 try:
     
     while True:
-        data = sock.recv(16)
+        data = sock.recv(32)
         print("received "+ str(data))
 
 finally:
