@@ -9,5 +9,5 @@ DIRECTORY = '/home/pi/REC/'
 os.system("mkdir "+DIRECTORY)
 i=1
 while i<13:
-	os.system("libcamera-vid -t 300000 -o "+DIRECTORY+DATE+".h264")
+	os.system("libcamera-vid -t 3000 -o "+DIRECTORY+DATE+".h264")
 	i+=1
