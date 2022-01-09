@@ -19,20 +19,20 @@ max_throttle = 2000
 min_throttle = 700
 pi = pigpio.pi() # Connect to local Pi.
 
-pi.set_servo_pulsewidth(SERVO, 0) # Minimum throttle.
+pi.set_servo_pulsewidth(SERVO, 0)
 
 time.sleep(1)
 
 for i in range(min_throttle,max_throttle):
     pi.set_servo_pulsewidth(SERVO, i)
 print("max")
-time.sleep(0.5)
+time.sleep(1)
 
 for i in range(max_throttle,min_throttle):
     pi.set_servo_pulsewidth(SERVO, i)
 
 print("min")
-time.sleep(0.5)
+time.sleep(1)
 
 for i in range(min_throttle,1100):
     pi.set_servo_pulsewidth(SERVO, i)
