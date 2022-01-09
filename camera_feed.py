@@ -1,14 +1,13 @@
 from picamera import PiCamera
 from time import sleep
-import pathlib
-from time import sleep
+import os
 import datetime
 
 DATE = datetime.datetime.today().strftime("%d-%B-%Y_%H:%M")
 DIRECTORY = '/home/pi/REC/' + DATE
-pathlib.Path(DIRECTORY).mkdir(parents=True, exist_ok=True) 
-camera = PiCamera()
 
-camera.start_recording(DIRECTORY + '/TIMG_{0:05d}.h264'.format(i))
-sleep(5)
-camera.stop_recording()
+os.system("mkdir "+DIRECTORY)
+i=1
+while i<13:
+	os.system("libcamera-vid -t 300000 -o test.h264")
+	i++
