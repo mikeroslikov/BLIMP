@@ -1,29 +1,36 @@
-import RPi.GPIO as GPIO
-import pigpio
+#!/usr/bin/env python
+
+# esc_start.py
+# 2015-04-14
+# Public Domain
+#
+# Sends the servo pulses needed to initialise some ESCs
+#
+# Requires the pigpio daemon to be running
+#
+# sudo pigpiod
+
 import time
- 
-servo = 23
- 
-pwm = pigpio.pi() 
-pwm.set_mode(servo, pigpio.OUTPUT)
- 
-pwm.set_PWM_frequency( servo, 50 )
- 
-pwm.set_servo_pulsewidth( servo, 2500 ) ;
-time.sleep( 1 )
-pwm.set_servo_pulsewidth( servo, 500 ) ;
-time.sleep( 3 )
 
-"""
-print( "90 deg" )
-pwm.set_servo_pulsewidth( servo, 1500 ) ;
-time.sleep( 3 )
- 
-print( "180 deg" )
-pwm.set_servo_pulsewidth( servo, 2500 ) ;
-time.sleep( 3 )
+import pigpio
 
-"""
-# turning off servo
-pwm.set_PWM_dutycycle(servo, 0)
-pwm.set_PWM_frequency( servo, 0 )
+SERVO = 4
+
+pi = pigpio.pi() # Connect to local Pi.
+
+pi.set_servo_pulsewidth(SERVO, 1000) # Minimum throttle.
+
+time.sleep(1)
+
+pi.set_servo_pulsewidth(SERVO, 2000) # Maximum throttle.
+
+time.sleep(1)
+
+pi.set_servo_pulsewidth(SERVO, 1100) # Slightly open throttle.
+
+time.sleep(1)
+
+pi.set_servo_pulsewidth(SERVO, 0) # Stop servo pulses.
+
+pi.stop() # Disconnect from local Raspberry Pi.
+
