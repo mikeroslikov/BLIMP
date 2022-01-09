@@ -34,10 +34,10 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            connection.sendall(w1.get.to_bytes(2, byteorder='big'))
+            connection.sendall(w1.get().to_bytes(2, byteorder='big'))
             time.sleep(0.1)
-            tk.update_idletasks()
-            tk.update()
+            master.update_idletasks()
+            master.update()
             
     finally:
         # Clean up the connection
