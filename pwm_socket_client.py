@@ -26,7 +26,7 @@ try:
     while True:
         data = int.from_bytes(sock.recv(32), byteorder='big')
         #print("received "+ str(data))
-		pi.set_servo_pulsewidth(SERVO, data)
+        pi.set_servo_pulsewidth(SERVO, data)
 
 finally:
     print("closing socket")
