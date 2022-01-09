@@ -1,6 +1,18 @@
 import socket
 import sys
 
+import time
+
+import pigpio
+
+SERVO = 23
+pi = pigpio.pi() # Connect to local Pi.
+
+pi.set_mode(SERVO, pigpio.OUTPUT)
+
+pi.set_PWM_frequency(SERVO,500)
+
+pi.set_servo_pulsewidth(SERVO, 0)
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -13,8 +25,10 @@ try:
     
     while True:
         data = int.from_bytes(sock.recv(32), byteorder='big')
-        print("received "+ str(data))
+        #print("received "+ str(data))
+		pi.set_servo_pulsewidth(SERVO, data)
 
 finally:
     print("closing socket")
     sock.close()
+	pi.stop()
