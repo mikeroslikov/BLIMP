@@ -16,4 +16,4 @@ a2=re.findall(r"0x....", data2)
 
 for j in range(0,len(a1)):
     if a1[j] != a2[j]:
-	    print(str(i))
+	    print(str(j))
