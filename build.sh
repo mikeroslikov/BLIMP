@@ -1,1 +1,1 @@
-gcc i2c-main.c -o i2c-build
+gcc i2c-main.c i2c-dev.h -o i2c-build
