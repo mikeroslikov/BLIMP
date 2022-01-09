@@ -16,8 +16,12 @@ import pigpio
 
 SERVO = 23
 max_throttle = 2000
-min_throttle = 700
+min_throttle = 1000
 pi = pigpio.pi() # Connect to local Pi.
+
+pi.set_mode(SERVO, pigpio.OUTPUT)
+
+pi.set_PWM_frequency(SERVO,500)
 
 pi.set_servo_pulsewidth(SERVO, 0)
 
@@ -34,7 +38,7 @@ for i in range(max_throttle,min_throttle):
 print("min")
 time.sleep(1)
 
-for i in range(min_throttle,1100):
+for i in range(min_throttle,1200):
     pi.set_servo_pulsewidth(SERVO, i)
 
 print("mid")
