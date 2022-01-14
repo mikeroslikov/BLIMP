@@ -3,7 +3,7 @@ import sys
 import time
 
 throttle_position=1000
-throttle_min =1000
+throttle_min =1500
 throttle_max = 2000
 
 
