@@ -10,10 +10,9 @@ p.start(2.5) # Initialization
 try:
   while True:
     for i in range(0,1000):
-    for i in range(0,1000):
 	    p.ChangeDutyCycle(i/10)
 	    time.sleep(0.1)
-    for i in range(100,0):
+    for i in range(1000,0):
 	    p.ChangeDutyCycle(i/10)
 	    time.sleep(0.1)
     
