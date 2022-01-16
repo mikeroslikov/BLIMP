@@ -3,16 +3,18 @@ import sys
 
 import time
 
-import pigpio
 
-SERVO = 23
-pi = pigpio.pi() # Connect to local Pi.
+import board
+import busio
+import adafruit_pca9685
+i2c = busio.I2C(board.SCL, board.SDA)
+hat = adafruit_pca9685.PCA9685(i2c)
+hat.frequency = 50
+led_channel = hat.channels[0]
+#led_channel.duty_cycle = 0xffff
+#led_channel.duty_cycle = 0
 
-pi.set_mode(SERVO, pigpio.OUTPUT)
 
-pi.set_PWM_frequency(SERVO,500)
-
-pi.set_servo_pulsewidth(SERVO, 0)
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -21,15 +23,12 @@ server_address = ("192.168.0.94",10000)
 print("connecting to" + str(server_address))
 sock.connect(server_address)
 
-try:
-    
+while True:
     while True:
-        data = int.from_bytes(sock.recv(32), byteorder='big')
-        #print("received "+ str(data))
-        if data < 2500 and data > 500 :
-            pi.set_servo_pulsewidth(SERVO, data)
-
+        data = int.from_bytes(sock.recv(16), byteorder='big')
+        print("received "+ str(data))
+        led_channel.duty_cycle = data
+			
 finally:
-    print("closing socket")
-    sock.close()
-    pi.stop()
+print("closing socket")
+sock.close()

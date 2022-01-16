@@ -2,6 +2,20 @@ import socket
 import sys
 import time
 
+throttle_position=1000
+throttle_min =0
+throttle_max = 0xffff
+
+
+
+from tkinter import *
+master = Tk()
+master.geometry("500x500")
+master.columnconfigure(0, weight=1)
+master.rowconfigure(0, weight=1)
+w1 = Scale(master, from_=throttle_min, to=throttle_max, tickinterval=10)
+w1.set(throttle_min)
+w1.pack(fill=BOTH)
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,10 +37,8 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            th = int(input("Duty Cycle (%)"))
-            th = (th/100)*0xffff
-            connection.sendall(th.to_bytes(2, byteorder='big'))
-            #time.sleep(0.1)
+            connection.sendall(w1.get().to_bytes(2, byteorder='big'))
+            time.sleep(0.1)
             master.update_idletasks()
             master.update()
             
