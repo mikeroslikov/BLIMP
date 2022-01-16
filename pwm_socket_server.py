@@ -2,6 +2,9 @@ import socket
 import sys
 import time
 
+#5%-10% duty cycle at 50Hz is the range of the ESC
+max = (0xffff)*0.1
+min = (0xffff)*0.05
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,8 +26,8 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            th = float(input("Duty Cycle (%)"))
-            th = (th/100)*(0xffff)
+            th = float(input("Throttle (%)"))
+            th = ((th/100)*(max-min))+min
             th = int(th)
             connection.sendall(th.to_bytes(2, byteorder='big'))
             time.sleep(0.1)
