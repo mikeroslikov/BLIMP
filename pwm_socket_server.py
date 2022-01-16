@@ -28,8 +28,6 @@ while True:
             th = int(th)
             connection.sendall(th.to_bytes(2, byteorder='big'))
             time.sleep(0.1)
-            master.update_idletasks()
-            master.update()
             
     finally:
         # Clean up the connection
