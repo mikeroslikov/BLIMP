@@ -23,12 +23,12 @@ server_address = ("192.168.0.94",10000)
 print("connecting to" + str(server_address))
 sock.connect(server_address)
 
-while True:
+try:
     while True:
         data = int.from_bytes(sock.recv(16), byteorder='big')
         print("received "+ str(data))
         led_channel.duty_cycle = data
 			
 finally:
-print("closing socket")
-sock.close()
+    print("closing socket")
+    sock.close()
