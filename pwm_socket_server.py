@@ -23,10 +23,10 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            th = int(input("Duty Cycle (%)"))
-            th = (th/100)*0xffff
+            th = int(float(input("Duty Cycle (%)")))
+            th = (th/100)*(0xffff)
             connection.sendall(th.to_bytes(2, byteorder='big'))
-            #time.sleep(0.1)
+            time.sleep(0.1)
             master.update_idletasks()
             master.update()
             
