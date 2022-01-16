@@ -25,7 +25,7 @@ while True:
         while True:
             th = float(input("Duty Cycle (%)"))
             th = (th/100)*(0xffff)
-			th = int(th)
+            th = int(th)
             connection.sendall(th.to_bytes(2, byteorder='big'))
             time.sleep(0.1)
             master.update_idletasks()
